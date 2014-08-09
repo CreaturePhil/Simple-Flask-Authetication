@@ -71,3 +71,10 @@ def logout():
     session.pop('logged_in', None)
     flash('You were logged out')
   return redirect(url_for('login'))
+
+@app.route('/user/<user>')
+def profile(user):
+  data_user = query_db('select * from users where username = ?', [user], one=True)
+  if data_user == None:
+    return 'User not found'
+  return render_template('profile.html', user = data_user['username'])
