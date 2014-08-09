@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<title>Hello</title>
+</head>
+<body>
+<div class=page>
+  <h1>Flaskr</h1>
+  <div>
+  {% if not session.logged_in %}
+    <a href="{{ url_for('register') }}">register</a>
+    <a href="{{ url_for('login') }}">log in</a>
+  {% else %}
+    <a href="{{ url_for('logout') }}">log out</a>
+  {% endif %}
+  </div>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div>{{ messages.pop() }}</div>
+    {% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</div>
+</body>
+</html>
