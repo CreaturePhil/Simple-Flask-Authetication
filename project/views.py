@@ -55,7 +55,7 @@ def login():
     password = request.form['password']
 
     user = query_db('select * from users where username = ?', [username], one=True)
-    if not validate_login(username, password, user['username'], user['password']):
+    if user is None or not validate_login(username, password, user['username'], user['password']):
       flash('Username or password is invalid')
       return redirect(url_for('login'))
 
